@@ -24,7 +24,7 @@ from .._version import __version__
 LARGE_FONT = ("fixedsys", 32, 'bold')
 MEDIUM_FONT = ("fixedsys", 14)
 SMALL_FONT = ("Times", 10, 'bold')
-BUTTON_FONT = ('fixedsys', 16, 'bold')
+TITLE_FONT = ('Verana', 11, 'bold')
 PASSWORD_LENGTH = (range(8,21))
 PASSWORD_OPTION = ('YES', 'NO')
 
@@ -120,9 +120,9 @@ class MainMenu(tk.Frame):
                                       textvariable=self.cityLocation)
         self.locationLabel.grid(row=1, column=0, columnspan=2, sticky='ew', ipadx=1, ipady=1)
 
-        self.systeminfoButton = tk.Button(self, font=MEDIUM_FONT, bg='blue', fg='white',
+        self.systeminfoButton = tk.Button(self, font=TITLE_FONT, bg='blue', fg='white',
                                           relief='groove', text='SYSTEM INFORMATION')
-        self.systeminfoButton.pack(side='top', fill='x', ipady=6)
+        self.systeminfoButton.pack(side='top', fill='x', ipady=3)
 
         """
         System information frame
@@ -153,9 +153,9 @@ class MainMenu(tk.Frame):
         self.osVersionLabel.grid(row=1, column=1, sticky='e', padx=10)
 
         # network information butotn
-        self.networkinfoButton = tk.Button(self, font=MEDIUM_FONT, bg='gray12', fg='white',
-                                          relief='groove', text='Network Information')
-        self.networkinfoButton.pack(side='top', fill='x', ipady=6)
+        self.networkinfoButton = tk.Button(self, font=TITLE_FONT, bg='gray12', fg='white',
+                                          relief='groove', text='NETWORK INFORMATION')
+        self.networkinfoButton.pack(side='top', fill='x', ipady=3)
 
         """
         Network information frame.
@@ -214,16 +214,14 @@ class MainMenu(tk.Frame):
 
         self.button5Img = ImageTk.PhotoImage(Image.open('data/gui/button5.png').resize((275, 65)))
         self.md5HashButton = tk.Button(self.buttonFrame, image=self.button5Img, font=MEDIUM_FONT, bg='black',
-                                      fg='black', relief='groove')
+                                       fg='black', relief='groove')
 
         self.md5HashButton.pack(side='top', fill='x')
 
-
-
-        self.programExitButton = tk.Button(self, font=MEDIUM_FONT, bg='white', fg='black', text='QUIT',
+        self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='QUIT',
                                            command=lambda: sys.exit())
 
-        self.programExitButton.pack(side='bottom', ipadx=5, ipady=6, fill='x')
+        self.programExitButton.pack(side='bottom', ipadx=5, ipady=6, pady=4, fill='x')
 
         self.digital_clock()
 
