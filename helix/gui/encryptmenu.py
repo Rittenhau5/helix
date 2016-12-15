@@ -203,7 +203,7 @@ class EncryptMenu(tk.Frame):
         :return:
 
         """
-        export_directory = filedialog.askdirectory(initialdir ="/", title="Export Directory")
+        export_directory = filedialog.askdirectory(initialdir ="/", title="Select Export Directory")
         self.destinationDirectory.set(export_directory)
 
         filename = self.fileToEncrypt.get()

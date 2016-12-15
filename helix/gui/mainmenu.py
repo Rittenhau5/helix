@@ -24,6 +24,7 @@ from .._version import __version__
 LARGE_FONT = ("fixedsys", 32, 'bold')
 MEDIUM_FONT = ("fixedsys", 14)
 SMALL_FONT = ("Times", 10, 'bold')
+BUTTON_FONT = ('fixedsys', 16, 'bold')
 PASSWORD_LENGTH = (range(8,21))
 PASSWORD_OPTION = ('YES', 'NO')
 
@@ -121,7 +122,7 @@ class MainMenu(tk.Frame):
 
         self.systeminfoButton = tk.Button(self, font=MEDIUM_FONT, bg='gray12', fg='white',
                                           relief='groove', text='System Information')
-        self.systeminfoButton.pack(side='top', fill='x', ipady=3)
+        self.systeminfoButton.pack(side='top', fill='x', ipady=6)
 
         """
         System information frame
@@ -154,7 +155,7 @@ class MainMenu(tk.Frame):
         # network information butotn
         self.networkinfoButton = tk.Button(self, font=MEDIUM_FONT, bg='gray12', fg='white',
                                           relief='groove', text='Network Information')
-        self.networkinfoButton.pack(side='top', fill='x', ipady=3)
+        self.networkinfoButton.pack(side='top', fill='x', ipady=6)
 
         """
         Network information frame.
@@ -179,41 +180,50 @@ class MainMenu(tk.Frame):
 
         """
         self.buttonFrame = tk.Frame(self, relief='sunken', width=500, height=176, bg='black')
-        self.buttonFrame.pack(side='top', pady=15)
+        self.buttonFrame.pack(side='top', fill='x')
 
         self.buttonBackgroundImg = ImageTk.PhotoImage(Image.open('data/gui/background.png').resize((256,256)))
-        buttonBackgroundLabel = tk.Label(self.buttonFrame, image=self.buttonBackgroundImg,
-                                         bg='black').place(x=0, y=0, relwidth=1, relheight=1)
+        buttonBackgroundLabel = tk.Label(self.buttonFrame, image=self.buttonBackgroundImg, bg='black').place(x=0, y=0,
+                                                                                                             relwidth=1,
+                                                                                                             relheight=1)
         buttonBackgroundLabel = self.buttonBackgroundImg
 
-        self.pwdGeneratorButton = tk.Button(self.buttonFrame, font=MEDIUM_FONT, bg='white', fg='black',
-                                            relief='groove', height=5, width=10, text='Password\nGenerator',
-                                            command=lambda: self.on_password_button_click())
+        self.button1Img = ImageTk.PhotoImage(Image.open('data/gui/button1.png').resize((275,65)))
+        self.pwdGeneratorButton = tk.Button(self.buttonFrame, image=self.button1Img, font=MEDIUM_FONT, bg='black',
+                                            fg='black', relief='groove', command=lambda: self.on_password_button_click())
 
-        self.pwdGeneratorButton.grid(row=0, column=0, sticky='nsew', padx=20, pady=20)
+        self.pwdGeneratorButton.pack(side='top', fill='both')
 
-        self.ipaddresslookupButton = tk.Button(self.buttonFrame, font=MEDIUM_FONT, bg='white', fg='black',
-                                               relief='groove', height=5, width=10, text='Domain\nLookup',
-                                               command=lambda: controller.show_frame('WhoisMenu'))
+        self.button2Img = ImageTk.PhotoImage(Image.open('data/gui/button2.png').resize((275, 65)))
+        self.ipaddresslookupButton = tk.Button(self.buttonFrame, image=self.button2Img, font=MEDIUM_FONT, bg='black',
+                                               fg='black', relief='groove', command=lambda: controller.show_frame('WhoisMenu'))
 
-        self.ipaddresslookupButton.grid(row=0, column=1, sticky='nsew', padx=20, pady=20)
+        self.ipaddresslookupButton.pack(side='top', fill='x')
 
-        self.fileencryptButton = tk.Button(self.buttonFrame, font=MEDIUM_FONT, bg='white', fg='black',
-                                           relief='groove', height=5, width=10, text='File\nEncryption',
-                                           command=lambda: controller.show_frame("EncryptMenu"))
+        self.button3Img = ImageTk.PhotoImage(Image.open('data/gui/button3.png').resize((275, 65)))
+        self.fileencryptButton = tk.Button(self.buttonFrame, image=self.button3Img, font=MEDIUM_FONT, bg='black',
+                                           fg='black', relief='groove', command=lambda: controller.show_frame("EncryptMenu"))
 
-        self.fileencryptButton.grid(row=2, column=0, sticky='nsew', padx=20, pady=20)
+        self.fileencryptButton.pack(side='top', fill='x')
 
-        self.rsakeyButton = tk.Button(self.buttonFrame, font=MEDIUM_FONT, bg='white', fg='black',
-                                      relief='groove', height=5, width=10, text='RSA Key\nGenerator',
-                                      command=lambda: controller.show_frame("RsaMenu"))
+        self.button4Img = ImageTk.PhotoImage(Image.open('data/gui/button4.png').resize((275, 65)))
+        self.rsakeyButton = tk.Button(self.buttonFrame, image=self.button4Img, font=MEDIUM_FONT, bg='black',
+                                      fg='black', relief='groove',command=lambda: controller.show_frame("RsaMenu"))
 
-        self.rsakeyButton.grid(row=2, column=1, sticky='nsew', padx=20, pady=20)
+        self.rsakeyButton.pack(side='top', fill='x')
 
-        self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='QUIT',
+        self.button5Img = ImageTk.PhotoImage(Image.open('data/gui/button5.png').resize((275, 65)))
+        self.md5HashButton = tk.Button(self.buttonFrame, image=self.button5Img, font=MEDIUM_FONT, bg='black',
+                                      fg='black', relief='groove')
+
+        self.md5HashButton.pack(side='top', fill='x')
+
+
+
+        self.programExitButton = tk.Button(self, font=MEDIUM_FONT, bg='white', fg='black', text='QUIT',
                                            command=lambda: sys.exit())
 
-        self.programExitButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
+        self.programExitButton.pack(side='bottom', ipadx=5, ipady=6, fill='x')
 
         self.digital_clock()
 
