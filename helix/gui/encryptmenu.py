@@ -21,7 +21,7 @@ from ..password_generator import password_generator
 
 # STATIC VARIABLES
 LARGE_FONT = ("fixedsys", 32, 'bold')
-MEDIUM_FONT = ("fixedsys", 14)
+MEDIUM_FONT = ("Times", 12, 'bold')
 SMALL_FONT = ("Times", 10, 'bold')
 PASSWORD_LENGTH = (range(8,21))
 
@@ -103,8 +103,9 @@ class EncryptMenu(tk.Frame):
         Title label
 
         """
-        self.encryptTitleLabel = tk.Label(self, bd=5, font=MEDIUM_FONT, fg='white', bg='gray12', text='File Encryption')
-        self.encryptTitleLabel.pack(side='top', fill='x', ipady=2)
+        self.cryptoTitleLabelImg = ImageTk.PhotoImage(Image.open('data/gui/button3.png').resize((275,65)))
+        cryptoTitleLabel = tk.Label(self, image=self.cryptoTitleLabelImg, fg='white', bg='gray12',).pack(side='top', fill='x', ipady=2)
+        cryptoTitleLabel = self.cryptoTitleLabelImg
 
         self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='QUIT',
                                            command=lambda: sys.exit())
@@ -153,21 +154,27 @@ class EncryptMenu(tk.Frame):
 
         """
         status = self.encryptWidgetStatus.get()
-        self.encryptWidgetFileButton = tk.Button(self.encryptWidgetFrame, font=MEDIUM_FONT, bg='white', fg='black', text='SELECT FILE', command=lambda: self.on_select_file_button_click())
+        self.encryptWidgetFileButton = tk.Button(self.encryptWidgetFrame, font=MEDIUM_FONT, bg='white', fg='black',
+                                                 text='SELECT FILE', command=lambda: self.on_select_file_button_click())
 
-        self.encryptWidgetPasswordButton = tk.Button(self.encryptWidgetFrame, bd=2, font=MEDIUM_FONT, fg='black', bg='white', text="PASSWORD", command=lambda: self.on_encrypt_password_button_click())
+        self.encryptWidgetPasswordButton = tk.Button(self.encryptWidgetFrame, bd=2, font=MEDIUM_FONT, fg='black',
+                                                     bg='white', text="PASSWORD", command=lambda: self.on_encrypt_password_button_click())
 
-        self.encryptWidgetFilenameEntry = tk.Entry(self.encryptWidgetFrame, bd=2, fg='green', bg='black', textvariable=self.fileToEncrypt)
-        self.encryptWidgetPasswordEntry = tk.Entry(self.encryptWidgetFrame, bd=2, fg='green', bg='black', textvariable=self.encryptionPassword)
+        self.encryptWidgetFilenameEntry = tk.Entry(self.encryptWidgetFrame, bd=2, fg='green', bg='black',
+                                                   textvariable=self.fileToEncrypt)
+        self.encryptWidgetPasswordEntry = tk.Entry(self.encryptWidgetFrame, bd=2, fg='green', bg='black',
+                                                   textvariable=self.encryptionPassword)
 
-        self.encryptWidgetEncryptFileButton = tk.Button(self.encryptWidgetFrame, bd=2, font=MEDIUM_FONT, fg='black', bg='white', text="ENCRYPT", command=lambda: self.on_encrypt_file_button_click())
+        self.encryptWidgetEncryptFileButton = tk.Button(self.encryptWidgetFrame, bd=2, font=MEDIUM_FONT,
+                                                        fg='black', bg='white', text="ENCRYPT",
+                                                        command=lambda: self.on_encrypt_file_button_click())
 
         if status == False:
             self.encryptWidgetFileButton.grid(row=0, column=0, sticky='w', ipadx=10)
             self.encryptWidgetPasswordButton.grid(row=1, column=0, sticky='nsew', ipadx=10)
             self.encryptWidgetFilenameEntry.grid(row=0, column=1, sticky='w', ipadx=10)
             self.encryptWidgetPasswordEntry.grid(row=1, column=1, sticky='w', ipadx=10)
-            self.encryptWidgetEncryptFileButton.grid(row=2, column=0, columnspan=2, sticky='nsew', ipadx=10, pady=2)
+            self.encryptWidgetEncryptFileButton.grid(row=2, column=0, columnspan=2, sticky='ns',pady=2)
             self.encryptWidgetStatus.set(True)
         else:
             pass
@@ -240,7 +247,7 @@ class EncryptMenu(tk.Frame):
             self.decryptWidgetNewFilenameEntry.grid(row=1, column=1, ipadx=10, sticky='ew')
             self.decryptKeyFileButton.grid(row=2, column=0, sticky='ew', ipadx=8, ipady=1)
             self.decryptWidgetDecryptPasswordEntry.grid(row=2, column=1, sticky='ew', ipadx=10, ipady=1)
-            self.decryptWidgetDecryptButton.grid(row=3, column=0, columnspan=2, sticky='nsew', ipadx=10, pady=2)
+            self.decryptWidgetDecryptButton.grid(row=3, column=0, columnspan=2, sticky='ns', pady=2)
             self.decryptWidgetStatus.set(True)
         else:
             pass

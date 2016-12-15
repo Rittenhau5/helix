@@ -115,66 +115,6 @@ class MainMenu(tk.Frame):
                                   textvariable=self.timeDisplay)
         self.timeLabel.grid(row=0, column=0, sticky='ew', ipadx=1, ipady=1)
 
-        # location label
-        self.locationLabel = tk.Label(self.headerFrame, bd=2, font=MEDIUM_FONT, fg='white', bg='black',
-                                      textvariable=self.cityLocation)
-        self.locationLabel.grid(row=1, column=0, columnspan=2, sticky='ew', ipadx=1, ipady=1)
-
-        self.systeminfoButton = tk.Button(self, font=TITLE_FONT, bg='blue', fg='white',
-                                          relief='groove', text='SYSTEM INFORMATION')
-        self.systeminfoButton.pack(side='top', fill='x', ipady=3)
-
-        """
-        System information frame
-
-        """
-        # system information frame
-        self.sysinfoFrame = tk.Frame(self, relief='solid', bg='gray25')
-        self.sysinfoFrame.pack(side='top', fill='x')
-
-        # hostname
-        self.hostnameLabel = tk.Label(self.sysinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='gray25',
-                                 textvariable=self.systemName)
-        self.hostnameLabel.grid(row=0, column=0, sticky='e', padx=10)
-
-        # processor
-        self.processorLabel = tk.Label(self.sysinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='gray25',
-                                  textvariable=self.processorType)
-        self.processorLabel.grid(row=0, column=1, sticky='e', padx=10)
-
-        # os
-        self.osLabel = tk.Label(self.sysinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='gray25',
-                           textvariable=self.operatingSystem)
-        self.osLabel.grid(row=1, column=0, sticky='e', padx=10)
-
-        # os version
-        self.osVersionLabel = tk.Label(self.sysinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='gray25',
-                                  textvariable=self.operatingSystemVersion)
-        self.osVersionLabel.grid(row=1, column=1, sticky='e', padx=10)
-
-        # network information butotn
-        self.networkinfoButton = tk.Button(self, font=TITLE_FONT, bg='gray12', fg='white',
-                                          relief='groove', text='NETWORK INFORMATION')
-        self.networkinfoButton.pack(side='top', fill='x', ipady=3)
-
-        """
-        Network information frame.
-
-        """
-        # network information frame
-        self.networkinfoFrame = tk.Frame(self, relief='solid', bg='navy')
-        self.networkinfoFrame.pack(side='top')
-
-        # lan ip address
-        self.privateIPAddress = tk.Label(self.networkinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='gray25',
-                                         textvariable=self.lanIPAddress)
-        self.privateIPAddress.grid(row=0, column=0, sticky='nsew', ipadx=10)
-
-        # wan ip address
-        self.publicIPAddress = tk.Label(self.networkinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='gray25',
-                                        textvariable=self.wanIPAddress)
-        self.publicIPAddress.grid(row=0, column=1, sticky='nsew', ipadx=10)
-
         """
         Button Frame and corresponding buttons.
 
@@ -223,6 +163,11 @@ class MainMenu(tk.Frame):
 
         self.programExitButton.pack(side='bottom', ipadx=5, ipady=6, pady=4, fill='x')
 
+        self.systeminfoButton = tk.Button(self, font=TITLE_FONT, bg='blue', fg='white',
+                                          relief='groove', text='SYSTEM INFORMATION',
+                                          command=lambda: self.on_systeminfo_button_click())
+        self.systeminfoButton.pack(side='bottom', fill='x', ipady=3)
+
         self.digital_clock()
 
     """
@@ -239,6 +184,10 @@ class MainMenu(tk.Frame):
         # password generator label
         self.passwordMenu = tk.Toplevel(bg='black')
         self.passwordMenu.title("Password Generator")
+
+        self.passwordTitleImage = ImageTk.PhotoImage(Image.open('data/gui/button1.png').resize((275,65)))
+        passwordImage = tk.Label(self.passwordMenu, image=self.passwordTitleImage, bg='black').pack(side='top')
+        passwordImage = self.passwordTitleImage
 
         # primary frame
         self.passwordFrame = tk.Frame(self.passwordMenu, relief='solid', bg='gray12')
@@ -259,23 +208,18 @@ class MainMenu(tk.Frame):
         self.passwordOptionMenu = tk.OptionMenu(self.passwordFrame, self.passwordOption, *PASSWORD_OPTION)
         self.passwordOptionMenu.grid(row=1, column=0, sticky='nsew')
 
-
-        self.passwordImage = ImageTk.PhotoImage(Image.open('data/gui/password.png').resize((176,176)))
-        passwordImage = tk.Label(self.passwordMenu, image=self.passwordImage, bg='black').pack(side='top', pady=10)
-        passwordImage = self.passwordImage
-
         self.generateButton = tk.Button(self.passwordMenu, font=MEDIUM_FONT, bg='white', fg='black',
                                         text='Generate Password', command=lambda: self.on_generate_button_click())
-        self.generateButton.pack(side='top', ipadx=10, ipady=10, pady=10, fill='x')
+        self.generateButton.pack(side='top', ipadx=10, ipady=10, fill='x')
 
         self.userPasswordText = tk.Text(self.passwordMenu, height=1, bd=2, font=MEDIUM_FONT, fg='green', bg='black',
                                         width=30)
-        self.userPasswordText.pack(side='top', ipadx=10, ipady=10, pady=10)
+        self.userPasswordText.pack(side='top', ipadx=10, ipady=10)
         self.userPasswordText.insert('1.0', "Your password will appear here\nand copy to clipboard.")
 
         self.passwordExitButton = tk.Button(self.passwordMenu, font=SMALL_FONT, bg='white', fg='black', text='CLOSE',
                                             command=lambda: self.passwordMenu.destroy())
-        self.passwordExitButton.pack(side='bottom', ipadx=10, ipady=10, fill='x')
+        self.passwordExitButton.pack(side='bottom', ipadx=10, fill='x')
 
     def on_generate_button_click(self):
         """
@@ -294,6 +238,71 @@ class MainMenu(tk.Frame):
         clip.clipboard_clear()
         clip.clipboard_append(newPassword)
         clip.destroy()
+
+    def on_systeminfo_button_click(self):
+        """
+        Event handler to show system information on pop-up.
+        :return:
+
+        """
+        self.systemInformationTop = tk.Toplevel(bg='black')
+        self.systemInformationTop.title("Sysinfo")
+
+        """
+        System information frame
+
+        """
+        # system information frame
+        self.sysinfoFrame = tk.Frame(self.systemInformationTop, relief='solid', bg='black')
+        self.sysinfoFrame.pack(side='top', fill='x')
+
+        # hostname
+        self.hostnameLabel = tk.Label(self.sysinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='black',
+                                      textvariable=self.systemName)
+        self.hostnameLabel.grid(row=0, column=0, sticky='e', padx=10)
+
+        # processor
+        self.processorLabel = tk.Label(self.sysinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='black',
+                                       textvariable=self.processorType)
+        self.processorLabel.grid(row=0, column=1, sticky='e', padx=10)
+
+        # os
+        self.osLabel = tk.Label(self.sysinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='black',
+                                textvariable=self.operatingSystem)
+        self.osLabel.grid(row=1, column=0, sticky='e', padx=10)
+
+        # os version
+        self.osVersionLabel = tk.Label(self.sysinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='black',
+                                       textvariable=self.operatingSystemVersion)
+        self.osVersionLabel.grid(row=1, column=1, sticky='e', padx=10)
+
+        # ok destroy window button
+        self.sysinfoDestroyButton = tk.Button(self.systemInformationTop, font=SMALL_FONT, bg='white', fg='black',
+                                           relief='groove', text='OK', command=lambda: self.systemInformationTop.destroy())
+        self.sysinfoDestroyButton.pack(side='bottom', fill='x', ipady=3)
+
+        """
+        Network information frame.
+
+        """
+        # network information frame
+        self.networkinfoFrame = tk.Frame(self.systemInformationTop, relief='solid', bg='black')
+        self.networkinfoFrame.pack(side='top')
+
+        # lan ip address
+        self.privateIPAddress = tk.Label(self.networkinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='black',
+                                         textvariable=self.lanIPAddress)
+        self.privateIPAddress.grid(row=0, column=0, sticky='nsew', ipadx=10)
+
+        # wan ip address
+        self.publicIPAddress = tk.Label(self.networkinfoFrame, bd=2, font=SMALL_FONT, fg='white', bg='black',
+                                        textvariable=self.wanIPAddress)
+        self.publicIPAddress.grid(row=0, column=1, sticky='nsew', ipadx=10)
+
+        # location label
+        self.locationLabel = tk.Label(self.networkinfoFrame, bd=2, font=MEDIUM_FONT, fg='white', bg='black',
+                                      textvariable=self.cityLocation)
+        self.locationLabel.grid(row=1, column=0, columnspan=2, sticky='ew', ipadx=1, ipady=1)
 
     """
     Misc. Functionality

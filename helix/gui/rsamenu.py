@@ -33,6 +33,13 @@ class RsaMenu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, bg='black')
 
+        """
+        GUI Variables
+
+        """
+        self.rsakeyName = tk.StringVar()
+        self.rsakeyName.set("Enter Key name")
+
         data = InfoTools()
         """
         Date display
@@ -64,8 +71,19 @@ class RsaMenu(tk.Frame):
         Title label
 
         """
-        self.dnsTitleLabel = tk.Label(self, bd=5, font=MEDIUM_FONT, fg='white', bg='gray12', text='Generate RSA Key-Pair')
-        self.dnsTitleLabel.pack(side='top', fill='x', ipady=2)
+        self.RsaTitleLabelImg = ImageTk.PhotoImage(Image.open('data/gui/button4.png').resize((275,65)))
+        RsaTitleLabel = tk.Label(self, image=self.RsaTitleLabelImg, fg='white', bg='gray12',).pack(side='top', fill='x', ipady=2)
+        RsaTitleLabel = self.RsaTitleLabelImg
+
+        self.instructionLabel = tk.Label(self, bd=5, font=SMALL_FONT, fg='white', bg='black',
+                                         text="Enter name for key and click generate.")
+        self.instructionLabel.pack(side='top', fill='x', ipady=2)
+
+        self.rsakeyNameEntry = tk.Entry(self, bd=5, font=MEDIUM_FONT, fg='green', bg='white', textvariable=self.rsakeyName)
+        self.rsakeyNameEntry.pack(side='top', ipady=2)
+
+        self.rsakeyGenerateButton = tk.Button(self, font=MEDIUM_FONT, bg='white', fg='black', text='GENERATE KEY')
+        self.rsakeyGenerateButton.pack(side='top', ipady=2, pady=2)
 
         self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='QUIT',
                                            command=lambda: sys.exit())
@@ -79,10 +97,12 @@ class RsaMenu(tk.Frame):
         rsaImage = tk.Label(self, image=self.rsaImage, bg='black').pack(side='top', pady=10)
         rsaImage = self.rsaImage
 
-
-
         self.digital_clock()
 
+    """
+    Event Handlers
+
+    """
 
     """
     Misc. Functionality

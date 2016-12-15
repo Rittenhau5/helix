@@ -105,16 +105,15 @@ class WhoisMenu(tk.Frame):
                                   textvariable=self.timeDisplay)
         self.timeLabel.grid(row=0, column=0, sticky='ew', ipadx=1, ipady=1)
 
-
-
         """
         Title label
 
         """
-        self.dnsTitleLabel = tk.Label(self, bd=5, font=MEDIUM_FONT, fg='white', bg='gray12', text='IP Domain Lookup')
-        self.dnsTitleLabel.pack(side='top', fill='x', ipady=2)
+        self.dnsTitleLabelImg = ImageTk.PhotoImage(Image.open('data/gui/button2.png').resize((275,65)))
+        dnsTitleLabel = tk.Label(self, image=self.dnsTitleLabelImg, fg='white', bg='gray12',).pack(side='top', fill='x', ipady=2)
+        dnsTitleLabel = self.dnsTitleLabelImg
 
-        self.instructionLabel = tk.Label(self, bd=5, font=SMALL_FONT, fg='white', bg='gray25',
+        self.instructionLabel = tk.Label(self, bd=5, font=SMALL_FONT, fg='white', bg='black',
                                          textvariable=self.statusText)
 
         self.instructionLabel.pack(side='top', fill='x', ipady=2)
@@ -129,7 +128,7 @@ class WhoisMenu(tk.Frame):
         self.ipNameLookupButton = tk.Button(self, font=MEDIUM_FONT, bg='white', fg='black', text='LOOKUP',
                                             command=lambda: self.on_lookup_button_click())
 
-        self.ipNameLookupButton.pack(side='top', ipady=5, pady=5, fill='x')
+        self.ipNameLookupButton.pack(side='top', ipady=5, pady=5)
 
         """
         DNS Lookup information frame.
