@@ -120,8 +120,8 @@ class MainMenu(tk.Frame):
                                       textvariable=self.cityLocation)
         self.locationLabel.grid(row=1, column=0, columnspan=2, sticky='ew', ipadx=1, ipady=1)
 
-        self.systeminfoButton = tk.Button(self, font=MEDIUM_FONT, bg='gray12', fg='white',
-                                          relief='groove', text='System Information')
+        self.systeminfoButton = tk.Button(self, font=MEDIUM_FONT, bg='blue', fg='white',
+                                          relief='groove', text='SYSTEM INFORMATION')
         self.systeminfoButton.pack(side='top', fill='x', ipady=6)
 
         """
