@@ -44,8 +44,6 @@ class CryptoTools(object):
         with open(key_filename, 'w') as key_output:
             key_output.write(password)
 
-        print("Encrypt success")
-
     def decrypt(self, password, input_filename, output_filename):
         """
         Decrypts data from provided file name with provided password, then writes to provided filename.
@@ -61,9 +59,6 @@ class CryptoTools(object):
             decrypted_text = "%s" % decrypted_text.decode('utf8')
         with open(output_filename, 'w') as output:
             output.write(decrypted_text)
-        print("Decrypt success")
-
-
 
 
 if __name__ == '__main__':
