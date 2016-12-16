@@ -14,6 +14,7 @@ from .mainmenu import MainMenu
 from .whoismenu import WhoisMenu
 from .encryptmenu import EncryptMenu
 from .rsamenu import RsaMenu
+from .hashingmenu import HashingMenu
 
 # STATIC VARIABLES
 LARGE_FONT = ("Verdana", 16)
@@ -32,7 +33,7 @@ class HelixApp(tk.Tk):
 
         self.frames = {}
 
-        for F in (MainMenu, WhoisMenu, EncryptMenu, RsaMenu):
+        for F in (MainMenu, WhoisMenu, EncryptMenu, RsaMenu, HashingMenu):
             page_name = F.__name__
             frame = F(container, self)
             self.frames[page_name] = frame

@@ -38,7 +38,7 @@ class EncryptMenu(tk.Frame):
         tk.Frame.__init__(self, parent, bg='black')
 
         self.encryptImage = ImageTk.PhotoImage(Image.open('data/gui/encryptbackground.png').resize((176, 176)))
-        encryptImage = tk.Label(self, image=self.encryptImage, bg='black').place(x=0, y=0, relwidth=1, relheight=1)
+        encryptImage = tk.Label(self, image=self.encryptImage, bg='black').place(x=0, y=40, relwidth=1, relheight=1)
         encryptImage = self.encryptImage
 
         """

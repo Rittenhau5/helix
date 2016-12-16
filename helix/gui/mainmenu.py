@@ -154,7 +154,7 @@ class MainMenu(tk.Frame):
 
         self.button5Img = ImageTk.PhotoImage(Image.open('data/gui/button5.png').resize((275, 65)))
         self.md5HashButton = tk.Button(self.buttonFrame, image=self.button5Img, font=MEDIUM_FONT, bg='black',
-                                       fg='black', relief='groove')
+                                       fg='black', relief='groove', command=lambda: controller.show_frame("HashingMenu"))
 
         self.md5HashButton.pack(side='top', fill='x')
 

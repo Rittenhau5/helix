@@ -21,7 +21,7 @@ from ..rsakeytools import RsaKeyTools
 
 # STATIC VARIABLES
 LARGE_FONT = ("fixedsys", 32, 'bold')
-MEDIUM_FONT = ("fixedsys", 14)
+MEDIUM_FONT = ("Times", 12, 'bold')
 SMALL_FONT = ("Times", 10, 'bold')
 PASSWORD_LENGTH = (range(8,21))
 
@@ -41,7 +41,7 @@ class RsaMenu(tk.Frame):
 
         """
         self.rsakeyName = tk.StringVar()
-        self.rsakeyName.set("Enter Key name")
+        self.rsakeyName.set("")
 
         self.rsakeyExportDirectory = tk.StringVar()
         self.rsakeyExportDirectory.set("")
@@ -91,7 +91,7 @@ class RsaMenu(tk.Frame):
 
         self.rsakeyGenerateButton = tk.Button(self, font=MEDIUM_FONT, bg='white', fg='black', text='GENERATE KEY',
                                               command=lambda: self.on_rsakey_generate_button())
-        self.rsakeyGenerateButton.pack(side='top', ipady=2, pady=2)
+        self.rsakeyGenerateButton.pack(side='top', ipady=2, pady=10)
 
         self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='QUIT',
                                            command=lambda: sys.exit())
@@ -101,10 +101,11 @@ class RsaMenu(tk.Frame):
                                            command=lambda: controller.show_frame('MainMenu'))
         self.backButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
 
-        self.rsaImage = ImageTk.PhotoImage(Image.open('data/gui/rsabackground.png').resize((176, 176)))
-        rsaImage = tk.Label(self, image=self.rsaImage, bg='black').pack(side='top', pady=10)
+        self.rsaImage = ImageTk.PhotoImage(Image.open('data/gui/rsabackground.png').resize((146, 146)))
+        rsaImage = tk.Label(self, image=self.rsaImage, bg='black').pack(side='top')
         rsaImage = self.rsaImage
 
+        self.rsakeyNameEntry.focus_set()
         self.digital_clock()
 
     """

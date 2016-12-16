@@ -19,7 +19,7 @@ from ..whoistools import WhoisTools
 
 # STATIC VARIABLES
 LARGE_FONT = ("fixedsys", 32, 'bold')
-MEDIUM_FONT = ("fixedsys", 14)
+MEDIUM_FONT = ("Times", 12, 'bold')
 SMALL_FONT = ("Times", 10, 'bold')
 PASSWORD_LENGTH = (range(8,21))
 
