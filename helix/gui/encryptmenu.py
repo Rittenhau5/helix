@@ -13,6 +13,7 @@
 import sys
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import messagebox
 from time import strftime
 from PIL import Image, ImageTk
 from ..infotools import InfoTools
@@ -158,7 +159,8 @@ class EncryptMenu(tk.Frame):
                                                  text='SELECT FILE', command=lambda: self.on_select_file_button_click())
 
         self.encryptWidgetPasswordButton = tk.Button(self.encryptWidgetFrame, bd=2, font=MEDIUM_FONT, fg='black',
-                                                     bg='white', text="PASSWORD", command=lambda: self.on_encrypt_password_button_click())
+                                                     bg='white', text="PASSWORD",
+                                                     command=lambda: self.on_encrypt_password_button_click())
 
         self.encryptWidgetFilenameEntry = tk.Entry(self.encryptWidgetFrame, bd=2, fg='green', bg='black',
                                                    textvariable=self.fileToEncrypt)
@@ -218,6 +220,7 @@ class EncryptMenu(tk.Frame):
 
         encryptor = CryptoTools()
         encryptor.encrypt(password, filename, export_directory)
+        self.successMessageBox = messagebox.showinfo("Helix", "Success! File encrypted.")
 
 
 
@@ -302,6 +305,7 @@ class EncryptMenu(tk.Frame):
 
         decryptor = CryptoTools()
         decryptor.decrypt(password, filename, new_filename)
+        self.successMessageBox = messagebox.showinfo("Helix", "Success! File decrypted.")
 
 
     """

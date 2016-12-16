@@ -30,8 +30,8 @@ class RsaKeyTools(object):
         :return:
 
         """
-        private_key_filename = "%s.txt" % name
-        public_key_filename = "%s_pub.txt" % name
+        private_key_filename = export_directory + "/" + name + ".txt"
+        public_key_filename = export_directory + "/" + name + "_pub.txt"
 
         # generate public/private key pair
         key = rsa.generate_private_key(backend=default_backend(), public_exponent=65537, key_size=2048)
@@ -41,20 +41,19 @@ class RsaKeyTools(object):
 
         # convert private key to PEM container format
         pem = key.private_bytes(encoding=serialization.Encoding.PEM,
-                               format=serialization.PrivateFormat.TraditionalOpenSSL,
-                               encryption_algorithm=serialization.NoEncryption())
+                                format=serialization.PrivateFormat.TraditionalOpenSSL,
+                                encryption_algorithm=serialization.NoEncryption())
 
         private_key_string = pem.decode('utf-8')
         public_key_string = public_key.decode('utf-8')
 
-        return private_key_string, public_key_string
+        with open(private_key_filename, 'w') as private_key_file:
+            private_key_file.write(private_key_string)
 
+        with open(public_key_filename, 'w') as public_key_file:
+            public_key_file.write(public_key_string)
 
-
-
-
-
-
+        return True
 
 if __name__ == '__main__':
     key_tools = RsaKeyTools()

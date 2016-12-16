@@ -15,13 +15,6 @@ import platform
 import socket
 import geocoder
 
-
-
-
-# STATIC VARIABLES
-
-
-
 # MODULE
 class InfoTools(object):
     """

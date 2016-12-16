@@ -12,9 +12,12 @@
 # IMPORTS
 import sys
 import tkinter as tk
+from tkinter import filedialog
+from tkinter import messagebox
 from time import strftime
 from PIL import Image, ImageTk
 from ..infotools import InfoTools
+from ..rsakeytools import RsaKeyTools
 
 # STATIC VARIABLES
 LARGE_FONT = ("fixedsys", 32, 'bold')
@@ -39,6 +42,9 @@ class RsaMenu(tk.Frame):
         """
         self.rsakeyName = tk.StringVar()
         self.rsakeyName.set("Enter Key name")
+
+        self.rsakeyExportDirectory = tk.StringVar()
+        self.rsakeyExportDirectory.set("")
 
         data = InfoTools()
         """
@@ -71,7 +77,7 @@ class RsaMenu(tk.Frame):
         Title label
 
         """
-        self.RsaTitleLabelImg = ImageTk.PhotoImage(Image.open('data/gui/button4.png').resize((275,65)))
+        self.RsaTitleLabelImg = ImageTk.PhotoImage(Image.open('data/gui/button4.png').resize((275, 65)))
         RsaTitleLabel = tk.Label(self, image=self.RsaTitleLabelImg, fg='white', bg='gray12',).pack(side='top', fill='x', ipady=2)
         RsaTitleLabel = self.RsaTitleLabelImg
 
@@ -79,10 +85,12 @@ class RsaMenu(tk.Frame):
                                          text="Enter name for key and click generate.")
         self.instructionLabel.pack(side='top', fill='x', ipady=2)
 
-        self.rsakeyNameEntry = tk.Entry(self, bd=5, font=MEDIUM_FONT, fg='green', bg='white', textvariable=self.rsakeyName)
+        self.rsakeyNameEntry = tk.Entry(self, bd=5, font=MEDIUM_FONT, fg='green', bg='white',
+                                        textvariable=self.rsakeyName)
         self.rsakeyNameEntry.pack(side='top', ipady=2)
 
-        self.rsakeyGenerateButton = tk.Button(self, font=MEDIUM_FONT, bg='white', fg='black', text='GENERATE KEY')
+        self.rsakeyGenerateButton = tk.Button(self, font=MEDIUM_FONT, bg='white', fg='black', text='GENERATE KEY',
+                                              command=lambda: self.on_rsakey_generate_button())
         self.rsakeyGenerateButton.pack(side='top', ipady=2, pady=2)
 
         self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='QUIT',
@@ -93,7 +101,7 @@ class RsaMenu(tk.Frame):
                                            command=lambda: controller.show_frame('MainMenu'))
         self.backButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
 
-        self.rsaImage = ImageTk.PhotoImage(Image.open('data/gui/rsabackground.png').resize((176,176)))
+        self.rsaImage = ImageTk.PhotoImage(Image.open('data/gui/rsabackground.png').resize((176, 176)))
         rsaImage = tk.Label(self, image=self.rsaImage, bg='black').pack(side='top', pady=10)
         rsaImage = self.rsaImage
 
@@ -103,6 +111,24 @@ class RsaMenu(tk.Frame):
     Event Handlers
 
     """
+    def on_rsakey_generate_button(self):
+        """
+        Initializes RSA Tools class and generates key to chosen directory.
+        :return:
+
+        """
+        export_directory = filedialog.askdirectory(initialdir ="/", title="Select Export Directory")
+        self.rsakeyExportDirectory.set(export_directory)
+
+        rsa_key_name = self.rsakeyName.get()
+
+        rsakey_tools = RsaKeyTools()
+        if_successful = rsakey_tools.generate_key_pair(rsa_key_name, export_directory)
+        if if_successful:
+            self.successMessageBox = messagebox.showinfo("Helix", ("Success! Key %s exported." % rsa_key_name))
+        else:
+            self.failureMessageBox = messagebox.showerror("Helix", "Failure.")
+
 
     """
     Misc. Functionality
