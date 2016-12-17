@@ -34,10 +34,17 @@ def file_hash_generator(input_filename):
     :return:
 
     """
-    with open(input_filename, 'r') as file:
-        input_string = file.read(input_filename).encode("utf-8")
-        hash_string = string_hash_generator(input_string)
-        return hash_string
+    print(input_filename)
+    while True:
+        try:
+            with open(input_filename, 'rb') as file_to_read:
+                input_string = file_to_read.read()
+                hash_string = hashlib.md5(input_string).hexdigest()
+                print(hash_string)
+                return hash_string
+                break
+        except FileNotFoundError:
+            break
 
 
 

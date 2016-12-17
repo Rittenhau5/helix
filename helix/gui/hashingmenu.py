@@ -93,11 +93,11 @@ class HashingMenu(tk.Frame):
         self.hashStringEntry.pack(side='top', ipady=2, pady=5)
 
         self.hashStringButton = tk.Button(self.hashingFrame, font=MEDIUM_FONT, bg='white', fg='black',
-                                                 text='HASH STRING', command=lambda: self.on_hash_string_button_click())
+                                          text='HASH STRING', command=lambda: self.on_hash_string_button_click())
         self.hashStringButton.pack(side='top', ipady=2, ipadx=10)
 
         self.hashFileButton = tk.Button(self.hashingFrame, font=MEDIUM_FONT, bg='white', fg='black',
-                                          text='HASH FILE')
+                                        text='HASH FILE', command=lambda: self.on_hash_file_button_click())
         self.hashFileButton.pack(side='top', ipady=2, ipadx=23)
 
         self.hashText = tk.Text(self.hashingFrame, height=1, bd=2, font=MEDIUM_FONT, fg='green', bg='black', width=30)
@@ -133,6 +133,21 @@ class HashingMenu(tk.Frame):
         hashed_string = string_hash_generator(string_to_hash)
         self.hashText.delete('1.0', 'end')
         self.hashText.insert('1.0', hashed_string)
+
+    def on_hash_file_button_click(self):
+        """
+        Event handler to hash a file.
+        :return:
+
+        """
+        file_to_hash = filedialog.askopenfilename(initialdir="/", title="Select File",
+                                                  filetypes=(("Exe files", "*.exe"),("All files", "*.*")))
+        if file_to_hash:
+            hashed_file_contents = file_hash_generator(file_to_hash)
+            self.hashText.delete('1.0', 'end')
+            self.hashText.insert('1.0', hashed_file_contents)
+        else:
+            pass
 
 
     """

@@ -219,8 +219,11 @@ class EncryptMenu(tk.Frame):
         password = self.encryptionPassword.get()
 
         encryptor = CryptoTools()
-        encryptor.encrypt(password, filename, export_directory)
-        self.successMessageBox = messagebox.showinfo("Helix", "Success! File encrypted.")
+        if export_directory:
+            encryptor.encrypt(password, filename, export_directory)
+            messagebox.showinfo("Helix", "Success! File encrypted.")
+        else:
+            messagebox.showerror("Error", "File not found")
 
 
 
@@ -304,9 +307,11 @@ class EncryptMenu(tk.Frame):
         password = self.decryptionPassword.get()
 
         decryptor = CryptoTools()
-        decryptor.decrypt(password, filename, new_filename)
-        self.successMessageBox = messagebox.showinfo("Helix", "Success! File decrypted.")
-
+        if filename:
+            decryptor.decrypt(password, filename, new_filename)
+            self.successMessageBox = messagebox.showinfo("Helix", "Success! File decrypted.")
+        else:
+            messagebox.showerror("No file found", "Error: File not found")
 
     """
     Misc. Functionality

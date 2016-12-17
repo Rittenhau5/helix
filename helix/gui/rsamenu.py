@@ -125,11 +125,13 @@ class RsaMenu(tk.Frame):
 
         rsakey_tools = RsaKeyTools()
         if_successful = rsakey_tools.generate_key_pair(rsa_key_name, export_directory)
-        if if_successful:
-            self.successMessageBox = messagebox.showinfo("Helix", ("Success! Key %s exported." % rsa_key_name))
+        if export_directory:
+            if if_successful:
+                self.successMessageBox = messagebox.showinfo("Helix", ("Success! Key %s exported." % rsa_key_name))
+            else:
+                self.failureMessageBox = messagebox.showerror("Helix", "Failure.")
         else:
-            self.failureMessageBox = messagebox.showerror("Helix", "Failure.")
-
+            messagebox.showerror("Error", "Failure! Enter name for key pair.")
 
     """
     Misc. Functionality
