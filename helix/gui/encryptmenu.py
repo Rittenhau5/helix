@@ -105,14 +105,16 @@ class EncryptMenu(tk.Frame):
 
         """
         self.cryptoTitleLabelImg = ImageTk.PhotoImage(Image.open('data/gui/button3.png').resize((275,65)))
-        cryptoTitleLabel = tk.Label(self, image=self.cryptoTitleLabelImg, fg='white', bg='gray12',).pack(side='top', fill='x', ipady=2)
+        cryptoTitleLabel = tk.Label(self, image=self.cryptoTitleLabelImg, fg='white', bg='gray12',).pack(side='top',
+                                                                                                         fill='x',
+                                                                                                         ipady=2)
         cryptoTitleLabel = self.cryptoTitleLabelImg
 
-        self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='QUIT',
+        self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='RoyalBlue4', fg='white', text='QUIT',
                                            command=lambda: sys.exit())
         self.programExitButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
 
-        self.backButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='BACK',
+        self.backButton = tk.Button(self, font=SMALL_FONT, bg='RoyalBlue4', fg='white', text='BACK',
                                            command=lambda: controller.show_frame('MainMenu'))
         self.backButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
 
@@ -123,8 +125,8 @@ class EncryptMenu(tk.Frame):
         self.encryptFrame = tk.Frame(self, relief='solid', bg='black')
         self.encryptFrame.pack(side='top', fill='x')
 
-        self.encryptButton = tk.Button(self.encryptFrame, font=MEDIUM_FONT, bg='white', fg='black', text='ENCRYPT FILE',
-                                       command=lambda: self.on_encrypt_button_click())
+        self.encryptButton = tk.Button(self.encryptFrame, font=MEDIUM_FONT, bg='RoyalBlue4', fg='white',
+                                       text='ENCRYPT FILE', command=lambda: self.on_encrypt_button_click())
         self.encryptButton.pack(side='top', ipadx=5, ipady=5, pady=5, fill='x')
 
         self.encryptWidgetFrame = tk.Frame(self.encryptFrame, relief='solid', bg='black')
@@ -133,8 +135,8 @@ class EncryptMenu(tk.Frame):
         self.decryptFrame = tk.Frame(self, relief='solid', bg='black')
         self.decryptFrame.pack(side='top', fill='x')
 
-        self.decryptButton = tk.Button(self.encryptFrame, font=MEDIUM_FONT, bg='white', fg='black', text='DECRYPT FILE',
-                                       command=lambda: self.on_decrypt_button_click())
+        self.decryptButton = tk.Button(self.encryptFrame, font=MEDIUM_FONT, bg='RoyalBlue4', fg='white',
+                                       text='DECRYPT FILE', command=lambda: self.on_decrypt_button_click())
         self.decryptButton.pack(side='top', ipadx=5, ipady=5, pady=5, fill='x')
 
         self.decryptWidgetFrame = tk.Frame(self.decryptFrame, relief='solid', bg='black')
@@ -155,11 +157,11 @@ class EncryptMenu(tk.Frame):
 
         """
         status = self.encryptWidgetStatus.get()
-        self.encryptWidgetFileButton = tk.Button(self.encryptWidgetFrame, font=MEDIUM_FONT, bg='white', fg='black',
+        self.encryptWidgetFileButton = tk.Button(self.encryptWidgetFrame, font=MEDIUM_FONT, bg='DodgerBlue4', fg='white',
                                                  text='SELECT FILE', command=lambda: self.on_select_file_button_click())
 
-        self.encryptWidgetPasswordButton = tk.Button(self.encryptWidgetFrame, bd=2, font=MEDIUM_FONT, fg='black',
-                                                     bg='white', text="PASSWORD",
+        self.encryptWidgetPasswordButton = tk.Button(self.encryptWidgetFrame, bd=2, font=MEDIUM_FONT, fg='white',
+                                                     bg='DodgerBlue4', text="PASSWORD",
                                                      command=lambda: self.on_encrypt_password_button_click())
 
         self.encryptWidgetFilenameEntry = tk.Entry(self.encryptWidgetFrame, bd=2, fg='green', bg='black',
@@ -168,7 +170,7 @@ class EncryptMenu(tk.Frame):
                                                    textvariable=self.encryptionPassword)
 
         self.encryptWidgetEncryptFileButton = tk.Button(self.encryptWidgetFrame, bd=2, font=MEDIUM_FONT,
-                                                        fg='black', bg='white', text="ENCRYPT",
+                                                        fg='white', bg='RoyalBlue4', text="ENCRYPT FILE",
                                                         command=lambda: self.on_encrypt_file_button_click())
 
         if status == False:
@@ -187,7 +189,8 @@ class EncryptMenu(tk.Frame):
         :return:
 
         """
-        filename = filedialog.askopenfilename(initialdir ="/", title="Select File", filetypes=(("Text files", "*.txt"), ("all files", "*.*")))
+        filename = filedialog.askopenfilename(initialdir ="/", title="Select File",
+                                              filetypes=(("Text files", "*.txt"), ("all files", "*.*")))
         self.fileToEncrypt.set(filename)
 
     def on_encrypt_password_button_click(self):
@@ -234,17 +237,29 @@ class EncryptMenu(tk.Frame):
 
         """
         status = self.decryptWidgetStatus.get()
-        self.decryptWidgetFilenameButton = tk.Button(self.decryptWidgetFrame, font=MEDIUM_FONT, bg='white', fg='black', text='SELECT FILE', command=lambda: self.on_select_decrypt_file_button_click())
+        self.decryptWidgetFilenameButton = tk.Button(self.decryptWidgetFrame, font=MEDIUM_FONT, bg='DodgerBlue4',
+                                                     fg='white', text='SELECT FILE',
+                                                     command=lambda: self.on_select_decrypt_file_button_click())
 
-        self.decryptWidgetNewFilenameButton = tk.Button(self.decryptWidgetFrame, bd=2, font=MEDIUM_FONT, fg='black', bg='white', text="NEW FILENAME", command=lambda: self.on_select_new_filename_button_click())
+        self.decryptWidgetNewFilenameButton = tk.Button(self.decryptWidgetFrame, bd=2, font=MEDIUM_FONT, fg='white',
+                                                        bg='DodgerBlue4', text="NEW FILENAME",
+                                                        command=lambda: self.on_select_new_filename_button_click())
 
-        self.decryptWidgetFilenameEntry = tk.Entry(self.decryptWidgetFrame, bd=2, fg='green', bg='black', textvariable=self.fileToDecrypt)
-        self.decryptWidgetNewFilenameEntry = tk.Entry(self.decryptWidgetFrame, bd=2, fg='green', bg='black', textvariable=self.newFileName)
-        self.decryptKeyFileButton = tk.Button(self.decryptWidgetFrame, font=MEDIUM_FONT, fg='black', bg='white', text="KEY FILE", command=lambda: self.on_decrypt_key_file_button_click())
+        self.decryptWidgetFilenameEntry = tk.Entry(self.decryptWidgetFrame, bd=2, fg='green', bg='black',
+                                                   textvariable=self.fileToDecrypt)
 
-        self.decryptWidgetDecryptPasswordEntry = tk.Entry(self.decryptWidgetFrame, bd=2, fg='green', bg='black', textvariable=self.decryptionKeyFile)
+        self.decryptWidgetNewFilenameEntry = tk.Entry(self.decryptWidgetFrame, bd=2, fg='green', bg='black',
+                                                      textvariable=self.newFileName)
 
-        self.decryptWidgetDecryptButton = tk.Button(self.decryptWidgetFrame, bd=2, font=MEDIUM_FONT, fg='black', bg='white', text="DECRYPT", command=lambda: self.on_decrypt_file_button_click())
+        self.decryptKeyFileButton = tk.Button(self.decryptWidgetFrame, font=MEDIUM_FONT, fg='white', bg='DodgerBlue4',
+                                              text="KEY FILE", command=lambda: self.on_decrypt_key_file_button_click())
+
+        self.decryptWidgetDecryptPasswordEntry = tk.Entry(self.decryptWidgetFrame, bd=2, fg='green', bg='black',
+                                                          textvariable=self.decryptionKeyFile)
+
+        self.decryptWidgetDecryptButton = tk.Button(self.decryptWidgetFrame, bd=2, font=MEDIUM_FONT, fg='white',
+                                                    bg='RoyalBlue4', text="DECRYPT FILE",
+                                                    command=lambda: self.on_decrypt_file_button_click())
 
         if status == False:
             self.decryptWidgetFilenameButton.grid(row=0, column=0, sticky='ew', ipadx=10)
@@ -264,7 +279,8 @@ class EncryptMenu(tk.Frame):
         :return:
 
         """
-        filename = filedialog.askopenfilename(initialdir ="/", title="Select File", filetypes=(("Encrypted files", "*.encrypted"), ("all files", "*.*")))
+        filename = filedialog.askopenfilename(initialdir ="/", title="Select File",
+                                              filetypes=(("Encrypted files", "*.encrypted"), ("all files", "*.*")))
         self.fileToDecrypt.set(filename)
         new_file_name = filename[:-10]
         self.newFileName.set(new_file_name)
@@ -275,7 +291,8 @@ class EncryptMenu(tk.Frame):
         :return:
 
         """
-        new_filename = filedialog.asksaveasfilename(initialdir ="/", title="Save as...", filetypes=(("Text files", "*.text"), ("all files", "*.*")))
+        new_filename = filedialog.asksaveasfilename(initialdir ="/", title="Save as...",
+                                                    filetypes=(("Text files", "*.text"), ("all files", "*.*")))
         self.newFileName.set(new_filename)
 
     def on_decrypt_key_file_button_click(self):
@@ -284,7 +301,8 @@ class EncryptMenu(tk.Frame):
         :return:
 
         """
-        key_file_name = filedialog.askopenfilename(initialdir="/", title="Select Key File", filetypes=(("Key files", "*.key"), ("all files", "*.*")))
+        key_file_name = filedialog.askopenfilename(initialdir="/", title="Select Key File",
+                                                   filetypes=(("Key files", "*.key"), ("all files", "*.*")))
         self.decryptionKeyFile.set(key_file_name)
         while True:
             try:

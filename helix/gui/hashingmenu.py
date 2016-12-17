@@ -92,11 +92,11 @@ class HashingMenu(tk.Frame):
                                                    textvariable=self.stringToHash)
         self.hashStringEntry.pack(side='top', ipady=2, pady=5)
 
-        self.hashStringButton = tk.Button(self.hashingFrame, font=MEDIUM_FONT, bg='white', fg='black',
+        self.hashStringButton = tk.Button(self.hashingFrame, font=MEDIUM_FONT, bg='RoyalBlue4', fg='white',
                                           text='HASH STRING', command=lambda: self.on_hash_string_button_click())
         self.hashStringButton.pack(side='top', ipady=2, ipadx=10)
 
-        self.hashFileButton = tk.Button(self.hashingFrame, font=MEDIUM_FONT, bg='white', fg='black',
+        self.hashFileButton = tk.Button(self.hashingFrame, font=MEDIUM_FONT, bg='RoyalBlue4', fg='white',
                                         text='HASH FILE', command=lambda: self.on_hash_file_button_click())
         self.hashFileButton.pack(side='top', ipady=2, ipadx=23)
 
@@ -108,13 +108,13 @@ class HashingMenu(tk.Frame):
         hashImage = tk.Label(self, image=self.hashImage, bg='black').pack(side='top')
         hashImage = self.hashImage
 
-        self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='QUIT',
+        self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='RoyalBlue4', fg='white', text='QUIT',
                                            command=lambda: sys.exit())
-        self.programExitButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
+        self.programExitButton.pack(side='bottom', ipadx=5, ipady=5, pady=3, fill='x')
 
-        self.backButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='BACK',
+        self.backButton = tk.Button(self, font=SMALL_FONT, bg='RoyalBlue4', fg='white', text='BACK',
                                            command=lambda: controller.show_frame('MainMenu'))
-        self.backButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
+        self.backButton.pack(side='bottom', ipadx=5, ipady=5, pady=3, fill='x')
 
         self.hashStringEntry.focus_set()
         self.digital_clock()

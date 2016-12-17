@@ -78,28 +78,29 @@ class RsaMenu(tk.Frame):
 
         """
         self.RsaTitleLabelImg = ImageTk.PhotoImage(Image.open('data/gui/button4.png').resize((275, 65)))
-        RsaTitleLabel = tk.Label(self, image=self.RsaTitleLabelImg, fg='white', bg='gray12',).pack(side='top', fill='x', ipady=2)
+        RsaTitleLabel = tk.Label(self, image=self.RsaTitleLabelImg, fg='white', bg='gray12',).pack(side='top',
+                                                                                                   fill='x', ipady=2)
         RsaTitleLabel = self.RsaTitleLabelImg
 
         self.instructionLabel = tk.Label(self, bd=5, font=SMALL_FONT, fg='white', bg='black',
                                          text="Enter name for key and click generate.")
         self.instructionLabel.pack(side='top', fill='x', ipady=2)
 
-        self.rsakeyNameEntry = tk.Entry(self, bd=5, font=MEDIUM_FONT, fg='green', bg='white',
+        self.rsakeyNameEntry = tk.Entry(self, bd=5, font=MEDIUM_FONT, fg='black', bg='white',
                                         textvariable=self.rsakeyName)
         self.rsakeyNameEntry.pack(side='top', ipady=2)
 
-        self.rsakeyGenerateButton = tk.Button(self, font=MEDIUM_FONT, bg='white', fg='black', text='GENERATE KEY',
+        self.rsakeyGenerateButton = tk.Button(self, font=MEDIUM_FONT, bg='RoyalBlue4', fg='white', text='GENERATE KEY',
                                               command=lambda: self.on_rsakey_generate_button())
         self.rsakeyGenerateButton.pack(side='top', ipady=2, pady=10)
 
-        self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='QUIT',
+        self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='RoyalBlue4', fg='white', text='QUIT',
                                            command=lambda: sys.exit())
-        self.programExitButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
+        self.programExitButton.pack(side='bottom', ipadx=5, ipady=5, pady=3, fill='x')
 
-        self.backButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='BACK',
+        self.backButton = tk.Button(self, font=SMALL_FONT, bg='RoyalBlue4', fg='white', text='BACK',
                                            command=lambda: controller.show_frame('MainMenu'))
-        self.backButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
+        self.backButton.pack(side='bottom', ipadx=5, ipady=5, pady=3, fill='x')
 
         self.rsaImage = ImageTk.PhotoImage(Image.open('data/gui/rsabackground.png').resize((146, 146)))
         rsaImage = tk.Label(self, image=self.rsaImage, bg='black').pack(side='top')

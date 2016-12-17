@@ -125,10 +125,10 @@ class WhoisMenu(tk.Frame):
         self.dnsMenuEntry = tk.Entry(self, bd=5, font=MEDIUM_FONT, fg='green', bg='white', textvariable=self.entryText)
         self.dnsMenuEntry.pack(side='top', ipady=2)
 
-        self.ipNameLookupButton = tk.Button(self, font=MEDIUM_FONT, bg='white', fg='black', text='LOOKUP',
+        self.ipNameLookupButton = tk.Button(self, font=MEDIUM_FONT, bg='RoyalBlue4', fg='white', text='LOOKUP',
                                             command=lambda: self.on_lookup_button_click())
 
-        self.ipNameLookupButton.pack(side='top', ipady=5, pady=5)
+        self.ipNameLookupButton.pack(side='top', ipady=1, pady=15)
 
         """
         DNS Lookup information frame.
@@ -172,13 +172,13 @@ class WhoisMenu(tk.Frame):
         self.countryDisplay = tk.Label(self.dnsInfoFrame, bd=5, font=SMALL_FONT, fg='white', bg='gray25', textvariable=self.country)
         self.countryDisplay.pack(side='top', fill='x')
 
-        self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='QUIT',
+        self.programExitButton = tk.Button(self, font=SMALL_FONT, bg='RoyalBlue4', fg='white', text='QUIT',
                                            command=lambda: sys.exit())
-        self.programExitButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
+        self.programExitButton.pack(side='bottom', ipadx=5, ipady=5, pady=3, fill='x')
 
-        self.backButton = tk.Button(self, font=SMALL_FONT, bg='white', fg='black', text='BACK',
+        self.backButton = tk.Button(self, font=SMALL_FONT, bg='RoyalBlue4', fg='white', text='BACK',
                                            command=lambda: controller.show_frame('MainMenu'))
-        self.backButton.pack(side='bottom', ipadx=5, ipady=5, pady=5, fill='x')
+        self.backButton.pack(side='bottom', ipadx=5, ipady=5, pady=3, fill='x')
 
         self.dnsMenuEntry.focus_set()
         self.digital_clock()
